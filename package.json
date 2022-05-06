@@ -1,0 +1,20 @@
+{
+  "name": "Chat-App",
+  "version": "1.1.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kacper Wicher, Raven Studio",
+  "license": "GNU GPLv3"
+}

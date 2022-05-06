@@ -1,0 +1,188 @@
+body
+{
+    font-family: 'Rubik', sans-serif;
+    background-color: #202020;
+    color: white;
+}
+
+body, html
+{
+    height: 100%;
+    margin: 0;
+}
+
+a
+{
+    color: white;
+    text-decoration: none;
+}
+
+.account
+{
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+.account-manage
+{
+    margin: 5px; 
+}
+
+.container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.panel
+{
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    height: 500px;
+    border: 1px solid #303030;
+    border-radius: 6px;
+}
+
+.panel-header
+{
+    box-sizing: border-box;
+    padding: 15px;
+    width: 100%;
+    background-color: #383838;
+}
+
+.chat
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.sent-message
+{
+    font-weight: 100;
+    font-size: 16px;
+    padding: 3px;
+    padding-left: 10px;
+    text-align: initial; 
+    overflow-y: hidden;
+    word-break: break-all
+}
+
+.input
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.message
+{
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    border: 0;
+    border-top: 1px solid #303030;
+    outline: none;
+    background-color: #242424;
+    color: white;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 10px;
+}
+
+.sendbtn
+{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #303030;
+    border: 1px solid #383838;
+    border-bottom-right-radius: 6px;
+}
+
+.sendbtn:hover
+{
+    cursor: pointer;
+}
+
+.form
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input
+{
+    width: 250px;
+    height: 35px;
+    font-size: 14px;
+    box-sizing: border-box;
+    color: white;
+    border-radius: 6px;
+    background-color: #202020;
+    border: 1px solid #383838;
+    outline: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+.error
+{
+    font-size: 14px;
+    font-weight: 100;
+    margin: 7px;
+}
+
+.submit
+{
+    width: 250px;
+    height: 35px;
+    border-radius: 6px;
+    border: 1px solid #383838;
+    background-color: #1b1b1b;
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+.submit:hover
+{
+    cursor: pointer;
+}
+
+.name
+{
+    padding: 5px;
+}
+
+.btn
+{
+    border-radius: 6px;
+    border: 1px solid #383838;
+    padding: 5px;
+    margin-left: 5px;
+    background-color: #303030;
+    transition: all ease-in-out 0.2s;
+}
+
+.btn:hover
+{
+    background-color: #252525;
+    cursor: pointer;
+}

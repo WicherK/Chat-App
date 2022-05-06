@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Chat-App - Register</title>
+    <meta name="description" content="Chat application made for learning and experience purpose. Have fun talking with your friends! Soon more updates and features.">
+    <meta name="author" content="RavenStudio">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet"> 
+</head>
+
+<body>
+    <div class="container">
+        <div class="account">
+            <div class="account-manage"><a href="/login">Login</a></div>
+            <div style="margin: 5px">|</div>
+            <div class="account-manage"><a href="/register">Register</a></div>
+        </div>
+
+        <form class="form" action="/register" method="POST">
+            <input class="form-input" type="text" required="true" placeholder="Username" name="USERNAME">
+            <input class="form-input" type="email" required="true" placeholder="Email" name="EMAIL">
+            <input class="form-input" type="password" required="true" placeholder="Password" name="PASSWORD">
+            <input class="form-input" type="password" required="true" placeholder="Repeat password"
+                name="REPEATPASSWORD">
+            <% if(typeof status !='undefined' && status==false) { %>
+                <div class="error" style="color: #f56042">
+                    <%=message%>
+                </div>
+            <% } else if(typeof status !='undefined' && status==true) { %>
+                    <div class="error" style="color: #90f542">Account successfully created.</div>
+            <% } %>
+            <button class="submit">Create an acccount</button>
+        </form>
+    </div>
+
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href)
+        }
+    </script>
+</body>
+
+</html>
