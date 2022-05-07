@@ -36,7 +36,7 @@ nodemon app.js
 ```
 
 ## Usage
-First u need to create and account and log in.
+First u need to create an account then log in.
 
 If you want to join to someone's room, get the link from your friend and paste it in the search bar. Now you can communicate.
 
