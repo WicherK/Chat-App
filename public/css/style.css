@@ -26,6 +26,12 @@ a
     font-weight: 100;
 }
 
+.login-panel
+{
+    display: flex;
+    flex-direction: row;
+}
+
 .account-manage
 {
     margin: 5px; 
@@ -65,19 +71,25 @@ a
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
-    overflow: auto;
-    overflow-x: hidden;
+    overflow-y: auto;
+    text-overflow: ellipsis;
 }
 
 .sent-message
 {
+    display: table-row;
     font-weight: 100;
     font-size: 16px;
     padding: 3px;
     padding-left: 10px;
     text-align: initial; 
+    word-break: break-all;
+    outline: none;
+}
+
+.text-handler
+{
     overflow-y: hidden;
-    word-break: break-all
 }
 
 .input
@@ -179,10 +191,30 @@ a
     margin-left: 5px;
     background-color: #303030;
     transition: all ease-in-out 0.2s;
+    text-size-adjust: auto;
 }
 
 .btn:hover
 {
     background-color: #252525;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 650px) {
+    .account
+    {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn
+    {
+        margin: 5px;
+    }
+
+    .panel
+    {
+        width: 95%;
+    }
 }

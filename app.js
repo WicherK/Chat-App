@@ -10,9 +10,10 @@ const session = require('express-session')
 const secrets = require('./secrets.json') //Import some secrets authentication keys
 
 //Routes for making requests
-const account = require('./js/account.js')
+const api = require('./js/api.js')
+
 //Router for rendering the htmls
-const render = require('./js/render.js')
+const render = require('./js/views.js')
 
 const PORT = 8081
 
@@ -30,24 +31,24 @@ app.use(session({
     secret: secrets.key,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true } 
+    cookie: { secure: true } //Remember to set it to true!
 }))
 
 //Render html pages
-app.get('/', render.mainPage)
+app.get('/', render.mainPage) //Render main page with login and register etc.
 
-app.get('/room/:roomId', render.chatPage)
+app.get('/room/:roomId', render.chatPage) //Getting into room with roomId
 
-app.get('/login', render.loginPage)
+app.get('/login', render.loginPage) //Render main page with login 
 
-app.get('/register', render.registerPage)
+app.get('/register', render.registerPage) //Render main page with register
 
 //Account management (use made API on main server)
-app.get('/logout', account.logout)
+app.get('/logout', api.logout)
 
-app.post('/login', account.postLogin)
+app.post('/login', api.postLogin)
 
-app.post('/register', account.postRegister)
+app.post('/register', api.postRegister)
 
 //Chat
 io.on('connection', (socket) => {
@@ -60,7 +61,7 @@ io.on('connection', (socket) => {
         io.to(socket.roomId).emit('message', '[Server] ' + socket.username + ' has joined to the room.')
     })
 
-    socket.on('disconnect', (msg) => {
+    socket.on('disconnect', (msg) => {          
         //Delete room on last person in room
         io.in(socket.roomId).allSockets().then(res => {
             if (res.size == 0) {

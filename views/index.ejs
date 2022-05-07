@@ -20,10 +20,12 @@
 <body>
     <div class="container">
         <div class="account">
-        <% if(typeof username=='undefined' ) { %>
-            <div class="account-manage"><a href="/login">Login</a></div>
-            <div style="margin: 5px">|</div>
-            <div class="account-manage"><a href="/register">Register</a></div>
+        <% if(typeof username == 'undefined') { %>
+            <div class="login-panel">
+                <div class="account-manage"><a href="/login">Login</a></div>
+                <div style="margin: 5px">|</div>
+                <div class="account-manage"><a href="/register">Register</a></div>
+            </div>
         <% } else { %>
             <div class="name">Your username: <%=username%></div>
             <div class="btn newroom">Create new room</div>
@@ -31,7 +33,7 @@
         <% } %>
         </div>
 
-        <% if (typeof username !='undefined' ) { %>
+        <% if (typeof username != 'undefined') { %>
         <div class="panel">
             <div class="panel-header">Chat</div>
             <div class="chat"></div>
@@ -51,7 +53,12 @@
         let alertCount = 0
 
         let roomId = window.location.href.split("/").pop()
-        let username = '<%=username%>'
+        let username = `<%=username%>`
+
+        let notify = `<%if(typeof notification != 'undefined') { %> <%=notification.status%> <% } %>` //Notify user that room doesn't exist
+
+        if(notify)
+            ShowNotification()
 
         //Join room
         socket.emit('join', { username: username, roomId: roomId })
@@ -79,10 +86,16 @@
 
         //If we received message we will show it on the screen
         socket.on('message', (msg) => {
-            let divMessage = document.createElement('div')
+            let divMessage = document.createElement('div') //Create message main element
             divMessage.className = 'sent-message'
-            let text = document.createTextNode(msg)
-            divMessage.appendChild(text)
+
+            let textDiv = document.createElement('div') //Create handler for text
+            textDiv.className = 'text-handler'
+
+            let text = document.createTextNode(msg) //Create node for text of the message
+
+            textDiv.appendChild(text)
+            divMessage.appendChild(textDiv)
 
             document.getElementsByClassName('chat')[0].appendChild(divMessage)
             document.getElementsByClassName('sent-message')[document.getElementsByClassName('sent-message').length - 1].scrollIntoView()
