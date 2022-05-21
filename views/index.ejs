@@ -11,6 +11,7 @@
     <meta name="author" content="RavenStudio">
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fontello/css/fontello.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,12 +35,20 @@
         </div>
 
         <% if (typeof username != 'undefined') { %>
-        <div class="panel">
-            <div class="panel-header">Chat</div>
-            <div class="chat"></div>
-            <div class="input">
-                <input class="message" type="text" required="true" name="MESSAGE" placeholder="Type something..." />
-                <div class="sendbtn">Send</div>
+        <div class="user-interface">
+            <div class="panel">
+                <div class="panel-header"><div class="header-text">Chat</div><div class="link"><i class="icon-link"></i></div></div>
+                <div class="chat"></div>
+                <div class="input">
+                    <input class="message" type="text" required="true" name="MESSAGE" placeholder="Type something..." />
+                    <div class="sendbtn">Send</div>
+                </div>
+            </div>
+            <div class="users">
+                <div class="users-wrapper">
+                    <div class="users-header"><div class="dot"></div>Online</div>
+                    <div class="users-list"></div>
+                </div>
             </div>
         </div>
         <% } %>
@@ -52,13 +61,9 @@
 
         let alertCount = 0
 
-        let roomId = window.location.href.split("/").pop()
+        let roomId = `<%=roomId%>`
+        window.history.replaceState(null, null, `/<%=method%>/${roomId}`) //Visually change the URL
         let username = `<%=username%>`
-
-        let notify = `<%if(typeof notification != 'undefined') { %> <%=notification.status%> <% } %>` //Notify user that room doesn't exist
-
-        if(notify)
-            ShowNotification()
 
         //Join room
         socket.emit('join', { username: username, roomId: roomId })
@@ -66,6 +71,19 @@
         let button = document.getElementsByClassName('sendbtn')[0]
         let newRoomButton = document.getElementsByClassName('newroom')[0]
         let message = document.getElementsByClassName('message')[0]
+        let copyInvite = document.getElementsByClassName('link')[0]
+
+        let linkAnimation
+
+        //Copy the invite animation
+        copyInvite.addEventListener('click', (event) => {
+            navigator.clipboard.writeText('https://ravenstudio.ga/join/' + roomId);
+            clearTimeout(linkAnimation)
+            copyInvite.innerHTML = '<i class="icon-ok"></i>'
+            linkAnimation = setTimeout(() => {
+            copyInvite.innerHTML = '<i class="icon-link"></i>'
+            }, 5000)
+        })
 
         //Send message
         button.addEventListener('click', (event) => {
@@ -82,6 +100,32 @@
         //Create new room
         newRoomButton.addEventListener('click', (element) => {
             window.location = '/'
+        })
+
+        //Update clients list
+        socket.on('who', (msg) => {
+            let users = document.getElementsByClassName('users-list')[0]
+
+            //Reset the list
+            users.innerHTML = ''
+
+            for(let i = 0; i < msg.length; i++)
+            {
+                let user = document.createElement('div')
+                user.className = 'user'
+
+                let userIcon = document.createElement('i')
+                userIcon.className = 'icon-user'
+
+                if(msg[i].isHost)
+                    userIcon.className = 'icon-crown'
+
+                let usernameText = document.createTextNode(msg[i].username)
+
+                user.appendChild(userIcon)
+                user.appendChild(usernameText)
+                users.appendChild(user)
+            }
         })
 
         //If we received message we will show it on the screen

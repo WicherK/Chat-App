@@ -1,6 +1,7 @@
 body
 {
     font-family: 'Rubik', sans-serif;
+    font-weight: 100;
     background-color: #202020;
     color: white;
 }
@@ -11,10 +12,36 @@ body, html
     margin: 0;
 }
 
+i
+{
+    font-size: 16px;
+    color: white;
+}
+
+i[class="icon-crown"]
+{
+    color: gold;
+}
+
+i[class="icon-user"]
+{
+    color: gray;
+}
+
 a
 {
     color: white;
     text-decoration: none;
+}
+
+.dot 
+{
+    height: 10px;
+    width: 10px;
+    margin-right: 10px;
+    background-color: rgb(114, 233, 124);
+    border-radius: 50%;
+    display: inline-block;
 }
 
 .account
@@ -47,6 +74,13 @@ a
     height: 100%;
 }
 
+.user-interface
+{
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+}
+
 .panel
 {
     display: flex;
@@ -55,14 +89,93 @@ a
     height: 500px;
     border: 1px solid #303030;
     border-radius: 6px;
+    flex: 0 1 auto;
+}
+
+.users
+{
+    width: 225px;
+    height: 100%;
+    position: absolute;
+    left: 100%;
+    margin-left: 20px;
+}
+
+.users-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.users-header
+{
+    background-color: #383838;
+    padding: 15px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.users-list
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid #383838;
+    overflow-y: auto;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.user
+{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+}
+
+.options
+{
+    margin-left: auto;
 }
 
 .panel-header
 {
+    display: flex;
+    flex-direction: row;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 5px;
     width: 100%;
     background-color: #383838;
+}
+
+.header-text
+{
+    padding: 10px;
+}
+
+.link
+{
+    font-size: 16px;
+    margin-left: auto;
+    transition: all ease-in-out 0.3s;
+    border-radius: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.link:hover
+{
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.icon-ok
+{
+    color: rgb(114, 233, 124);
 }
 
 .chat
@@ -204,7 +317,17 @@ a
     cursor: pointer;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 1280px) 
+{
+    .users
+    {
+        position: relative;
+        left: 0;
+    }
+}
+
+@media only screen and (max-width: 650px) 
+{
     .account
     {
         padding: 15px;
@@ -217,8 +340,18 @@ a
         margin: 5px;
     }
 
+    .user-interface
+    {
+        width: 100%;
+    }
+
     .panel
     {
-        width: 95%;
+        width: 75%;
+    }
+
+    .users-wrapper
+    {
+        min-width: 25%;  
     }
 }
